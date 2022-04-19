@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "t4np454nd1",
+    "database": "db_crm",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "t4np454nd1",
+    "database": "db_crm",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "t4np454nd1",
+    "database": "db_crm",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}

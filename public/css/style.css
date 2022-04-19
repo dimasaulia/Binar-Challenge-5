@@ -1,0 +1,144 @@
+/* SIDE MENU */
+.dashboard__row {
+    display: grid;
+    grid-template-columns: var(--navHeight) auto;
+    overflow: hidden;
+    width: 100%;
+}
+
+.dashboard {
+    height: 100vh !important;
+}
+
+.aside__nav {
+    height: 100%;
+}
+
+.aside__nav-item {
+    aspect-ratio: 1/1;
+    cursor: pointer;
+}
+
+.aside__nav-icon {
+    width: 30px;
+}
+
+.active {
+    background: rgba(var(--neutral01), 0.3);
+}
+
+/* NAVBAR */
+
+.nav-height {
+    height: var(--navHeight) !important;
+}
+
+.nav__profil-img {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    width: 40px;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.list-active {
+    background: var(--darkBlue01);
+}
+
+/* MAIN */
+.dashboard__main-container {
+    height: calc(100% - var(--navHeight));
+}
+
+.dashboard__main-content {
+    height: calc(100vh - var(--navHeight));
+    overflow-y: scroll;
+}
+
+.dashboard__main-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.dashboard__main-content::-webkit-scrollbar-track {
+    background: rgba(var(--neutral01), 0.5);
+}
+
+.dashboard__main-content::-webkit-scrollbar-thumb {
+    background: var(--darkBlue03);
+    cursor: pointer;
+}
+
+.dashboard__main-content::-webkit-scrollbar-thumb:hover {
+    background: var(--darkBlue04);
+}
+
+.dummy {
+    background: pink;
+    height: 500px !important;
+    margin-bottom: 100px;
+    width: 100px;
+}
+
+.dadhboard__size>a:hover {
+    color: var(--darkBlue04);
+}
+
+.card {
+    transition: box-shadow 0.2s ease-in;
+}
+
+.card:hover {
+    box-shadow: var(--shadowHigh) !important;
+}
+
+/* FORM in edit.html */
+.form-width {
+    width: 500px !important;
+}
+
+.form-width:focus {
+    border: 1px solid var(--darkBlue04) !important;
+    box-shadow: none;
+    outline: none !important;
+}
+
+.btn-primary {
+    background: var(--darkBlue04) !important;
+    border-radius: 2px !important;
+}
+
+.btn {
+    border-radius: 2px !important;
+}
+
+.btn-primary-outline {
+    border: 2px solid var(--darkBlue04);
+    border-radius: 2px !important;
+}
+
+/* MODEL */
+body {
+    position: relative;
+}
+
+.model {
+    display: none !important;
+    opacity: 0;
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    transition: all 0.5s ease;
+    width: 400px;
+}
+
+.active {
+    display: flex !important;
+    opacity: 0;
+}
+
+.opacity {
+    opacity: 1;
+}

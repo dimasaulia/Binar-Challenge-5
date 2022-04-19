@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,300;0,500;0,700;1,100;1,300;1,500;1,700&display=swap');
+
+:root {
+    --darkBlue05: #091B6F;
+    --darkBlue04: #0D28A6;
+    --darkBlue03: #5E70C4;
+    --darkBlue02: #AEB7E1;
+    --darkBlue01: #CFD4ED;
+    --limeGreen05: #3D7B3F;
+    --limeGreen04: #5CB85F;
+    --limeGreen03: #92D094;
+    --limeGreen02: #C9E7CA;
+    --limeGreen01: #DEF1DF;
+    --danger: #FA2C5A;
+    --warning: #F9CC00;
+    --success: #73CA5C;
+    --primary: #0D28A6;
+    --neutral05: #151515;
+    --neutral04: #3C3C3C;
+    --neutral03: #8A8A8A;
+    --neutral02: #F4F5F7;
+    --neutral01: 255, 255, 255;
+    --heroColor: #F1F3FF;
+    --shadowLow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    --shadowHigh: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    --navHeight: 75px;
+    transition: all 200ms ease-in;
+}
+
+body,
+html {
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin: 0 !important;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 !important;
+}
+
+a {
+    color: var(--neutral05);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--neutral05);
+    text-decoration: none;
+}
+
+.row {
+    /*Overwrite bootstrap*/
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+/* Color */
+.darkBlue04 {
+    background-color: var(--darkBlue04);
+}
+
+.neutral01 {
+    background-color: rgb(var(--neutral01));
+}
+
+.neutral02 {
+    background-color: var(--neutral02);
+}
+
+.fw-light {
+    font-weight: 100 !important;
+}
+
+.fw-normal {
+    font-weight: 300 !important;
+}
+
+.fw-bold {
+    font-weight: 500 !important;
+}
+
+.fw-bolder {
+    font-weight: 700 !important;
+}
+
+.nav-wdith {
+    height: 64px !important;
+}
+
+.shadow-lg {
+    box-shadow: var(--shadowHigh) !important;
+}
+
+.shadow-sm {
+    box-shadow: var(--shadowLow);
+}
+
+.btn-darkBlue04 {
+    background: var(--darkBlue04) !important;
+    border-radius: 5px !important;
+}
+
+.text-darkBlue02 {
+    color: var(--darkBlue02);
+}
+
+.btn-size {
+    border: 2px solid var(--darkBlue02);
+}
+
+.btn-size-active {
+    background: rgba(13, 41, 166, 0.15) !important;
+    border: 2px solid var(--darkBlue04);
+    color: var(--darkBlue04);
+    font-weight: 700 !important;
+}
+
+.text-danger {
+    color: var(--danger) !important;
+}
+
+.btn-delete {
+    border: 2px solid var(--danger);
+}
+
+.btn-success {
+    background: var(--limeGreen04) !important;
+    border: none;
+}
+
+.btn {
+    transition: transform 0.2s ease;
+}
+
+.btn:focus,
+.btn:active,
+.btn-primary:active,
+.btn-primary:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.btn:active,
+.btn-primary:active {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    aspect-ratio: 16 / 10;
+    margin: 0 auto;
+    object-fit: contain;
+    overflow: hidden;
+    width: 85% !important;
+}
+
+.me-6 {
+    margin-right: 10rem !important;
+}

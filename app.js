@@ -1,5 +1,7 @@
 const express = require("express");
 const router = require("./router");
+const hbs = require("hbs");
+const helper = require("./hbs");
 const app = express();
 require("dotenv").config();
 
@@ -10,13 +12,11 @@ app.use("/static", express.static("public"));
 app.set("views", "views");
 app.set("view engine", "hbs");
 
-const hbs = require("hbs");
-hbs.registerHelper("selected", function (a, b, options) {
-  if (a.toLowerCase() === b.toLowerCase())
-    return new hbs.SafeString(`selected`);
-});
+hbs.registerHelper("selected", helper.selected);
+hbs.registerHelper("price", helper.price);
+hbs.registerHelper("date", helper.date);
 
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 const ROUTER = require("./router");
 const { options } = require("./router");
 

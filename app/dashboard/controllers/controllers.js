@@ -2,7 +2,7 @@ const axios = require("axios");
 
 exports.index = (req, res) => {
   axios
-    .get("http://localhost:8000/api/cars")
+    .get("http://localhost:8080/api/cars")
     .then((resp) => {
       const data = { cars: resp.data, name: "Dimas" };
       res.render("index", data);
@@ -17,7 +17,7 @@ exports.add = (req, res) => {
 };
 
 exports.edit = (req, res) => {
-  const url = `http://localhost:8000/api/car/${req.query.id}`;
+  const url = `http://localhost:8080/api/car/${req.query.id}`;
   axios
     .get(url)
     .then((resp) => {

@@ -102,8 +102,8 @@ const renderData = (cars) => {
 const render_size = (size, btn) => {
   const url =
     size.toLowerCase() !== "all"
-      ? `http://localhost:8000/api/filter/${size}`
-      : `http://localhost:8000/api/cars`;
+      ? `http://localhost:8080/api/filter/${size}`
+      : `http://localhost:8080/api/cars`;
   btn.addEventListener("click", () => {
     dashboard_container.innerHTML = "";
     fetch(url)

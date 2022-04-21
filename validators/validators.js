@@ -20,4 +20,17 @@ FormValidators.prototype.validateUserInput = function () {
   });
 };
 
+/**
+ * @description A method to validate input option
+ * @param {Array} accepted_value accepts an array of allowed values
+ * @param {String} form_data Form data entered by the user
+ */
+FormValidators.prototype.validateOptionInput = function (
+  accepted_value,
+  form_data
+) {
+  if (!accepted_value.includes(form_data))
+    this.errors.push("Value Form Option Tidak Sesuai!");
+};
+
 module.exports = FormValidators;

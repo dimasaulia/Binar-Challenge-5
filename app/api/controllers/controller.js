@@ -35,6 +35,10 @@ exports.create = (req, res) => {
   const foto = req.body.foto || "";
 
   formValidators.validateUserInput();
+  formValidators.validateOptionInput(
+    ["small", "medium", "large"],
+    req.body.size
+  );
 
   if (formValidators.errors.length) {
     req.flash("message", formValidators.errors);

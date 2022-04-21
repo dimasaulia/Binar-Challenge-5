@@ -68,6 +68,13 @@ const beautiful_date = (date) => {
   return new Intl.DateTimeFormat("id-ID", options).format(new Date(date));
 };
 
+const beautiful_price = (price) => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  }).format(price);
+};
+
 const html = (car) => {
   const template = `
               <div class="card p-3 mb-4 me-4 shadow-sm" style="width: 25rem;">
@@ -78,8 +85,8 @@ const html = (car) => {
                   />
                   <div class="card-body">
                     <h6 class="card-title mb-2"> ${car.name} </h6>
-                    <h5 class="card-text fw-bolder mb-2">Rp
-                      ${car.price}
+                    <h5 class="card-text fw-bolder mb-2">
+                      ${beautiful_price(car.price)}
                       / Hari</h5>
                     <p
                       class="card-text fw-normal mb-5 d-flex align-items-center"

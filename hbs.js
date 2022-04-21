@@ -1,6 +1,6 @@
 const hbs = require("hbs");
 
-exports.selected = function (a, b, options) {
+exports.selected = function (a, b) {
   if (a.toLowerCase() === b.toLowerCase())
     return new hbs.SafeString(`selected`);
 };

@@ -1,20 +1,59 @@
 const { CarRent } = require("../../../models");
-
+const FormValidators = require("../../../validators/validators");
 exports.list = (req, res) => {
-  CarRent.findAll().then((car) => {
+  const query = {
+    order: [["name", "ASC"]],
+  };
+  CarRent.findAll(query).then((car) => {
     res.status(200).json(car);
   });
 };
 
 exports.create = (req, res) => {
-  CarRent.create({
-    name: req.body.name,
-    price: req.body.price,
-    size: req.body.size,
-    foto: req.body.foto,
-  }).then((a) => {
-    res.status(200).redirect("/");
-  });
+  const formValidators = new FormValidators([
+    {
+      form_data: req.body.name,
+      form_name: "name",
+    },
+    {
+      form_data: req.body.price,
+      form_name: "price",
+    },
+    {
+      form_data: req.body.size,
+      form_name: "size",
+    },
+    {
+      form_data: req.body.foto,
+      form_name: "foto",
+    },
+  ]);
+
+  const name = req.body.name || "";
+  const price = req.body.price || "";
+  const size = req.body.size || "small";
+  const foto = req.body.foto || "";
+
+  formValidators.validateUserInput();
+
+  if (formValidators.errors.length) {
+    req.flash("message", formValidators.errors);
+    req.flash("name", name);
+    req.flash("price", price);
+    req.flash("size", size);
+    req.flash("foto", foto);
+    res.status(200).redirect("/add");
+  } else {
+    CarRent.create({
+      name: req.body.name,
+      price: req.body.price,
+      size: req.body.size,
+      foto: req.body.foto,
+    }).then((a) => {
+      req.flash("message", "Berhasil Menambahkan Mobil!!");
+      res.status(200).redirect("/");
+    });
+  }
 };
 
 exports.delete = (req, res) => {
@@ -23,6 +62,7 @@ exports.delete = (req, res) => {
       id: req.params.id,
     },
   }).then(() => {
+    req.flash("message", "Berhasil Menghapus Mobil!!");
     res.status(200).redirect("/");
   });
 };
@@ -38,26 +78,53 @@ exports.get = (req, res) => {
 };
 
 exports.update = (req, res) => {
+  const formValidators = new FormValidators([
+    {
+      form_data: req.body.name,
+      form_name: "name",
+    },
+    {
+      form_data: req.body.price,
+      form_name: "price",
+    },
+    {
+      form_data: req.body.size,
+      form_name: "size",
+    },
+    {
+      form_data: req.body.foto,
+      form_name: "foto",
+    },
+  ]);
+
+  formValidators.validateUserInput();
   const query = {
     where: {
       id: req.params.id,
     },
   };
-  CarRent.update(
-    {
-      name: req.body.name,
-      price: req.body.price,
-      size: req.body.size,
-      foto: req.body.foto,
-    },
-    query
-  )
-    .then(() => {
-      res.status(200).redirect("/");
-    })
-    .catch((err) => {
-      res.status(400).send("Gagal mengupdate artikel!");
-    });
+
+  if (formValidators.errors.length) {
+    req.flash("message", formValidators.errors);
+    res.status(200).redirect(`/update?id=${req.params.id}`);
+  } else {
+    CarRent.update(
+      {
+        name: req.body.name,
+        price: req.body.price,
+        size: req.body.size,
+        foto: req.body.foto,
+      },
+      query
+    )
+      .then(() => {
+        req.flash("message", "Berhasil Memperbaharui Data Mobil!!");
+        res.status(200).redirect("/");
+      })
+      .catch((err) => {
+        res.status(400).send("Gagal mengupdate mobil!");
+      });
+  }
 };
 
 exports.filter = (req, res) => {
@@ -65,8 +132,7 @@ exports.filter = (req, res) => {
     where: {
       size: req.params.size,
     },
+    order: [["name", "ASC"]],
   };
-
-  // console.log(query);
   CarRent.findAll(query).then((cars) => res.status(200).json(cars));
 };

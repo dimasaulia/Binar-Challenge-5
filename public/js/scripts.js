@@ -1,6 +1,11 @@
+const port = 8080;
+
 const model = document.querySelector(".model");
 const model_close = document.querySelector(".delete-cancel");
 const model_confirm = document.querySelector(".delete-confirm");
+
+const notif = document.querySelector(".notif");
+const notif_close = document.querySelector(".notif__close");
 
 const btn_size = document.querySelectorAll(".btn-size");
 const btn_size_small = document.querySelector("#size-small");
@@ -33,19 +38,48 @@ model_close.addEventListener("click", () => {
   }, 600);
 });
 
+// Notif
+// document.querySelector(".tes").addEventListener("click", () => {
+//   notif.classList.add("notif--active");
+//   setTimeout(() => {
+//     notif.classList.add("opacity");
+//     notif.classList.add("notif--transform");
+//   }, 100);
+// });
+
+if (document.querySelector(".notif__close")) {
+  document.querySelector(".notif__close").addEventListener("click", () => {
+    notif.classList.remove("opacity");
+    notif.classList.remove("notif--transform");
+    setTimeout(() => {
+      notif.classList.remove("notif--active");
+    }, 300);
+  });
+}
+
 // DATA FETCH AND RENDER
-const html = (d) => {
+const beautiful_date = (date) => {
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return new Intl.DateTimeFormat("id-ID", options).format(new Date(date));
+};
+
+const html = (car) => {
   const template = `
               <div class="card p-3 mb-4 me-4 shadow-sm" style="width: 25rem;">
                   <img
-                    src=${d.foto}
+                    src=${car.foto}
                     class="card-img-top mt-5 mb-5"
                     alt="Gambar Mobil"
                   />
                   <div class="card-body">
-                    <h6 class="card-title mb-2"> ${d.name} </h6>
+                    <h6 class="card-title mb-2"> ${car.name} </h6>
                     <h5 class="card-text fw-bolder mb-2">Rp
-                      ${d.price}
+                      ${car.price}
                       / Hari</h5>
                     <p
                       class="card-text fw-normal mb-5 d-flex align-items-center"
@@ -57,13 +91,13 @@ const html = (d) => {
                         style="display: inline-block; width: 18px;"
                       />
                       Update at
-                      ${d.updatedAt}
+                      ${beautiful_date(car.updatedAt)}
 
                     </p>
 
                     <div class="d-flex justify-content-between mb-4">
                       <a
-                        data-car_id="${d.id}"
+                        data-car_id="${car.id}"
                         class="btn-delete btn text-danger d-flex align-items-center justify-content-evenly px-xl-4 px-md-3 py-xl-3 py-md-2"
                       >
                         <img
@@ -75,7 +109,7 @@ const html = (d) => {
                       </a>
 
                       <a
-                        href="/update?id=${d.id}"
+                        href="/update?id=${car.id}"
                         class="btn btn-success text-light d-flex align-items-center justify-content-evenly px-xl-4 px-md-3 py-xl-3 py-md-2"
                       >
                         <img
@@ -102,8 +136,8 @@ const renderData = (cars) => {
 const render_size = (size, btn) => {
   const url =
     size.toLowerCase() !== "all"
-      ? `http://localhost:8080/api/filter/${size}`
-      : `http://localhost:8080/api/cars`;
+      ? `http://localhost:${port}/api/filter/${size}`
+      : `http://localhost:${port}/api/cars`;
   btn.addEventListener("click", () => {
     dashboard_container.innerHTML = "";
     fetch(url)
@@ -112,7 +146,6 @@ const render_size = (size, btn) => {
         renderData(data);
       });
   });
-  console.log("WORK");
 };
 
 render_size("small", btn_size_small);

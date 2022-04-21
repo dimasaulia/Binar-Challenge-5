@@ -57,7 +57,7 @@
           </div>
 
           <div
-            class="aside__nav-item active d-flex flex-column align-items-center justify-content-center"
+            class="aside__nav-item aside-active d-flex flex-column align-items-center justify-content-center"
           >
             <img
               src="static/img/icon--car.svg"
@@ -202,7 +202,7 @@
                   <div class="card-body">
                     <h6 class="card-title mb-2"> {{this.name}} </h6>
                     <h5 class="card-text fw-bolder mb-2">
-                      {{price this.price}}
+                      {{priceTag this.price}}
                       / Hari</h5>
                     <p
                       class="card-text fw-normal mb-5 d-flex align-items-center"
@@ -273,6 +273,17 @@
         <a class="btn btn-primary-outline px-4 delete-cancel">Tidak</a>
       </div>
     </div>
+
+    {{#if messages}}
+    <div class="notif notif--active opacity notif--transform d-flex justify-content-between align-items-start bg-dark text-light py-2 px-3 rounded-3 ">
+      <div class="notif__msg">
+            {{#each messages}}
+            <p class="mb-2 mt-2"> {{this}} </p>
+            {{/each}}
+      </div>
+      <div class="notif__close text-light"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    {{/if}}
   </body>
   <!-- BS Scripts -->
   <script

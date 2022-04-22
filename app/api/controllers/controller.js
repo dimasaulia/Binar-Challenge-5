@@ -102,6 +102,11 @@ exports.update = (req, res) => {
   ]);
 
   formValidators.validateUserInput();
+  formValidators.validateOptionInput(
+    ["small", "medium", "large"],
+    req.body.size
+  );
+
   const query = {
     where: {
       id: req.params.id,

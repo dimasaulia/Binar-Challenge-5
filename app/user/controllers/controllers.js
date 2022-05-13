@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { Users } = require("../../../models");
+const { Tokens } = require("../../../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -45,6 +46,15 @@ exports.login = async (req, res) => {
       user.dataValues,
       process.env.REFRESH_TOKEN_SECRET
     );
+
+    try {
+      Tokens.create({
+        refresh_token: refreshToken,
+      });
+    } catch {
+      console.log("SOMETHING ERROR");
+    }
+
     res.json({
       accesToken: accesToken,
       refreshToken: refreshToken,
@@ -52,6 +62,25 @@ exports.login = async (req, res) => {
   } catch {
     res.status(500).send("ERROR");
   }
+};
+
+exports.token = async (req, res) => {
+  const refreshToken = req.body.token;
+  if (refreshToken === null) return res.status(401).send();
+
+  // Cek Token
+  const token = await Tokens.findOne({
+    where: {
+      refresh_token: refreshToken,
+    },
+  });
+  if (token === null) return res.status(401).send("TOKEN NOT FOUND");
+
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+    if (err) return res.status(403).send();
+    const accesToken = generateToken({ username: user.username });
+    return res.json(accesToken);
+  });
 };
 
 function generateToken(user) {
